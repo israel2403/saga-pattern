@@ -50,6 +50,7 @@
 
 	<modules>
 		<module>core</module>
+		<module>orders</module>
 	</modules>
 
 	<dependencyManagement>
@@ -66,6 +67,13 @@
 				<groupId>jakarta.validation</groupId>
 				<artifactId>jakarta.validation-api</artifactId>
 				<version>3.1.1</version>
+			</dependency>
+			<!-- Share Spring Boot Test Starter version with all modules -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-test</artifactId>
+				<version>3.5.0</version>
+				<scope>test</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
