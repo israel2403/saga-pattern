@@ -1,6 +1,7 @@
 package com.huerta.orders.service;
 
 import com.huerta.core.dto.Order;
+import com.huerta.core.dto.events.OrderCreatedEvent;
 import com.huerta.core.types.OrderStatus;
 import com.huerta.orders.dao.jpa.entity.OrderEntity;
 import com.huerta.orders.dao.jpa.repository.OrderRepository;
@@ -22,6 +23,11 @@ public class OrderServiceImpl implements OrderService {
         entity.setStatus(OrderStatus.CREATED);
         orderRepository.save(entity);
 
+        final OrderCreatedEvent orderCreatedEvent = new OrderCreatedEvent(
+                entity.getId(),
+                entity.getCustomerId(),
+                entity.getProductId(),
+                entity.getProductQuantity());
         return new Order(
                 entity.getId(),
                 entity.getCustomerId(),
