@@ -7,26 +7,26 @@ import com.huerta.orders.dao.jpa.repository.OrderRepository;
 
 public class OrderServiceImpl implements OrderService {
 
-  private final OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
 
-  public OrderServiceImpl(OrderRepository orderRepository) {
-    this.orderRepository = orderRepository;
-  }
+    public OrderServiceImpl(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
 
-  @Override
-  public Order placeOrder(Order order) {
-    OrderEntity entity = new OrderEntity();
-    entity.setCustomerId(order.getCustomerId());
-    entity.setProductId(order.getProductId());
-    entity.setProductQuantity(order.getProductQuantity());
-    entity.setStatus(OrderStatus.CREATED);
-    orderRepository.save(entity);
+    @Override
+    public Order placeOrder(Order order) {
+        OrderEntity entity = new OrderEntity();
+        entity.setCustomerId(order.getCustomerId());
+        entity.setProductId(order.getProductId());
+        entity.setProductQuantity(order.getProductQuantity());
+        entity.setStatus(OrderStatus.CREATED);
+        orderRepository.save(entity);
 
-    return new Order(
-        entity.getId(),
-        entity.getCustomerId(),
-        entity.getProductId(),
-        entity.getProductQuantity(),
-        entity.getStatus());
-  }
+        return new Order(
+                entity.getId(),
+                entity.getCustomerId(),
+                entity.getProductId(),
+                entity.getProductQuantity(),
+                entity.getStatus());
+    }
 }
