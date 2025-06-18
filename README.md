@@ -36,3 +36,11 @@ To automatically formt code:
 ```bash
 mvn spotless:apply
 ```
+
+### Maven commands
+
+To install without running tests
+
+```bash
+mvn clean install -DskipTests
+```

@@ -75,6 +75,12 @@
 				<version>3.5.0</version>
 				<scope>test</scope>
 			</dependency>
+			<!-- Share Core version with All modules-->
+			<dependency>
+				<groupId>com.huerta</groupId>
+				<artifactId>core</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
