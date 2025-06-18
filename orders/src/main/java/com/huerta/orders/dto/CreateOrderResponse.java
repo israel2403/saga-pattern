@@ -1,0 +1,23 @@
+package com.huerta.orders.dto;
+
+import java.util.UUID;
+
+import com.huerta.core.types.OrderStatus;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+public class CreateOrderResponse {
+  private UUID orderId;
+  private UUID customerId;
+  private UUID productId;
+  private Integer productQuantity;
+  private OrderStatus status;
+
+}
