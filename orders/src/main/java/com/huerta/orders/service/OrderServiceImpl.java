@@ -5,14 +5,19 @@ import com.huerta.core.dto.events.OrderCreatedEvent;
 import com.huerta.core.types.OrderStatus;
 import com.huerta.orders.dao.jpa.entity.OrderEntity;
 import com.huerta.orders.dao.jpa.repository.OrderRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.core.KafkaTemplate;
 
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
 
-    public OrderServiceImpl(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
-    }
+    private final KafkaTemplate<String, Object> kafkaTemplate;
+
+    @Value("${orders.events.topic.name}")
+    private final String ordersEventsTopicName;
 
     @Override
     public Order placeOrder(Order order) {
@@ -23,11 +28,14 @@ public class OrderServiceImpl implements OrderService {
         entity.setStatus(OrderStatus.CREATED);
         orderRepository.save(entity);
 
-        final OrderCreatedEvent orderCreatedEvent = new OrderCreatedEvent(
-                entity.getId(),
-                entity.getCustomerId(),
-                entity.getProductId(),
-                entity.getProductQuantity());
+        final OrderCreatedEvent orderCreatedEvent =
+                new OrderCreatedEvent(
+                        entity.getId(),
+                        entity.getCustomerId(),
+                        entity.getProductId(),
+                        entity.getProductQuantity());
+
+        kafkaTemplate.send("ordersEventsTopicName", orderCreatedEvent);
         return new Order(
                 entity.getId(),
                 entity.getCustomerId(),
