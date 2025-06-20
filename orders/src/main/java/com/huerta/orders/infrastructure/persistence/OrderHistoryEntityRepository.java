@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.huerta.orders.domain.model.OrderHistoryEntity;
 
-public interface OrderHistoryRepository extends JpaRepository<OrderHistoryEntity, UUID> {
+public interface OrderHistoryEntityRepository extends JpaRepository<OrderHistoryEntity, UUID> {
 
     /**
      * Find the latest order history entry for a given order ID.
