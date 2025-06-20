@@ -1,9 +1,11 @@
-package com.huerta.orders.dao.jpa.repository;
+package com.huerta.orders.infrastructure.persistence;
 
-import com.huerta.orders.dao.jpa.entity.OrderHistoryEntity;
 import java.util.List;
 import java.util.UUID;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.huerta.orders.domain.model.OrderHistoryEntity;
 
 public interface OrderHistoryRepository extends JpaRepository<OrderHistoryEntity, UUID> {
 
@@ -11,7 +13,8 @@ public interface OrderHistoryRepository extends JpaRepository<OrderHistoryEntity
      * Find the latest order history entry for a given order ID.
      *
      * @param orderId the ID of the order
-     * @return a list of OrderHistoryEntity objects associated with the given order ID
+     * @return a list of OrderHistoryEntity objects associated with the given order
+     *         ID
      */
     List<OrderHistoryEntity> findByOrderId(UUID orderId);
 }

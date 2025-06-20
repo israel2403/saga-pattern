@@ -1,8 +1,10 @@
-package com.huerta.orders.dto;
+package com.huerta.orders.shared.dto;
 
-import com.huerta.core.types.OrderStatus;
 import java.sql.Timestamp;
 import java.util.UUID;
+
+import com.huerta.core.types.OrderStatus;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

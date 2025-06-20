@@ -1,14 +1,17 @@
 package com.huerta.orders.service;
 
-import com.huerta.core.types.OrderStatus;
-import com.huerta.orders.dao.jpa.entity.OrderHistoryEntity;
-import com.huerta.orders.dao.jpa.repository.OrderHistoryRepository;
-import com.huerta.orders.dto.OrderHistory;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+
 import org.springframework.beans.BeanUtils;
+
+import com.huerta.core.types.OrderStatus;
+import com.huerta.orders.application.usecase.OrderHistoryService;
+import com.huerta.orders.domain.model.OrderHistoryEntity;
+import com.huerta.orders.infrastructure.persistence.OrderHistoryRepository;
+import com.huerta.orders.shared.dto.OrderHistory;
 
 public class OrderHistoryServiceImpl implements OrderHistoryService {
 

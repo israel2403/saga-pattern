@@ -1,4 +1,4 @@
-package com.huerta.orders.service;
+package com.huerta.orders.application.usecase;
 
 import com.huerta.core.dto.Order;
 

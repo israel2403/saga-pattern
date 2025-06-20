@@ -1,7 +1,9 @@
-package com.huerta.orders.dto;
+package com.huerta.orders.shared.dto;
+
+import java.util.UUID;
 
 import com.huerta.core.types.OrderStatus;
-import java.util.UUID;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
