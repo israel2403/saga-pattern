@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.huerta.core.dto.Order;
-import com.huerta.orders.application.usecase.OrderHistoryService;
 import com.huerta.orders.application.usecase.OrderService;
+import com.huerta.orders.application.usecase.orderhistory.OrderHistoryService;
 import com.huerta.orders.shared.dto.CreateOrderRequest;
 import com.huerta.orders.shared.dto.CreateOrderResponse;
 import com.huerta.orders.shared.dto.OrderHistoryResponse;

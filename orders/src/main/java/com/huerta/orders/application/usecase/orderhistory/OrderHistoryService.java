@@ -1,4 +1,4 @@
-package com.huerta.orders.application.usecase;
+package com.huerta.orders.application.usecase.orderhistory;
 
 import java.util.List;
 import java.util.UUID;
