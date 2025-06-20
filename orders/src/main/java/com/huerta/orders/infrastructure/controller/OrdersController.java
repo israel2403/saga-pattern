@@ -1,4 +1,4 @@
-package com.huerta.orders.web;
+package com.huerta.orders.infrastructure.controller;
 
 import java.util.List;
 import java.util.UUID;
