@@ -49,32 +49,24 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.8</version>
+				<version>0.8.13</version>
 				<executions>
-					<!-- Prepares agent for test phase -->
 					<execution>
 						<id>prepare-agent</id>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
-						<configuration>
-							<excludes>
-								<exclude>java/*</exclude>
-								<exclude>javax/*</exclude>
-								<exclude>jakarta/*</exclude>
-							</excludes>
-						</configuration>
 					</execution>
-					<!-- Generates report after tests run -->
 					<execution>
 						<id>report</id>
-						<phase>test</phase>
+						<phase>verify</phase>
 						<goals>
 							<goal>report</goal>
 						</goals>
 					</execution>
 				</executions>
 			</plugin>
+
 		</plugins>
 	</build>
 
