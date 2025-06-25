@@ -1,5 +1,6 @@
 package com.huerta.orders.domain.repository;
 
+import com.huerta.core.types.OrderStatus;
 import com.huerta.orders.domain.model.OrderHistoryEntity;
 import java.util.List;
 import java.util.UUID;
@@ -11,7 +12,7 @@ public interface OrderHistoryPersistencePort {
      * @param orderHistoryEntity the order history entry to save
      * @return the saved order history entry
      */
-    OrderHistoryEntity save(OrderHistoryEntity orderHistoryEntity);
+    OrderHistoryEntity save(UUID orderId, OrderStatus orderStatus);
 
     /**
      * Finds all order history entries by order ID.

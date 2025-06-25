@@ -9,14 +9,12 @@ import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
-public class OrderHistoryEntityImpl implements CreateOrderHistoryUseCase {
+public class CreateOrderHistoryUseCaseImpl implements CreateOrderHistoryUseCase {
 
     private final OrderHistoryPersistencePort orderHistoryPersistencePort;
 
     @Override
     public OrderHistoryEntity execute(final UUID orderId, final OrderStatus orderStatus) {
-        final OrderHistoryEntity orderHistoryEntity = new OrderHistoryEntity(orderId, orderStatus);
-        orderHistoryPersistencePort.save(orderHistoryEntity);
-        return orderHistoryEntity;
+        return orderHistoryPersistencePort.save(orderId, orderStatus);
     }
 }

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.UUID;
 
 import com.huerta.core.types.OrderStatus;
-import com.huerta.orders.domain.model.OrderHistoryEntity;
 import com.huerta.orders.shared.dto.OrderHistory;
 
 public interface OrderHistoryService {
@@ -16,7 +15,7 @@ public interface OrderHistoryService {
      * @param orderStatus the status of the order
      * @return the created OrderHistoryEntity
      */
-    OrderHistoryEntity create(UUID orderId, OrderStatus orderStatus);
+    OrderHistory create(UUID orderId, OrderStatus orderStatus);
 
     /**
      * Retrieves the latest order history entry for a given order ID.

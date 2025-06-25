@@ -1,5 +1,6 @@
 package com.huerta.orders.infrastructure.persistence;
 
+import com.huerta.core.types.OrderStatus;
 import com.huerta.orders.domain.model.OrderHistoryEntity;
 import com.huerta.orders.domain.repository.OrderHistoryPersistencePort;
 import java.util.List;
@@ -13,7 +14,8 @@ public class OrderHistoryRepositoryAdapter implements OrderHistoryPersistencePor
     private final OrderHistoryEntityRepository orderHistoryEntityRepository;
 
     @Override
-    public OrderHistoryEntity save(OrderHistoryEntity orderHistoryEntity) {
+    public OrderHistoryEntity save(UUID orderId, OrderStatus orderStatus) {
+        OrderHistoryEntity orderHistoryEntity = new OrderHistoryEntity(orderId, orderStatus);
         this.orderHistoryEntityRepository.save(orderHistoryEntity);
         return orderHistoryEntity;
     }
