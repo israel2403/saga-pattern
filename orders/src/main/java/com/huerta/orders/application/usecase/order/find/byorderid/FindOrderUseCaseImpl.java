@@ -1,12 +1,15 @@
 package com.huerta.orders.application.usecase.order.find.byorderid;
 
+import java.util.UUID;
+
+import org.springframework.stereotype.Component;
+
 import com.huerta.core.dto.Order;
 import com.huerta.orders.domain.repository.OrderPersistencePort;
-import java.util.UUID;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-@Service
+import lombok.RequiredArgsConstructor;
+
+@Component
 @RequiredArgsConstructor
 public class FindOrderUseCaseImpl implements FindOrderUseCase {
 

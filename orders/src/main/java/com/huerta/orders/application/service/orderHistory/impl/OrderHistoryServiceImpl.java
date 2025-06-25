@@ -3,6 +3,8 @@ package com.huerta.orders.application.service.orderHistory.impl;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.stereotype.Service;
+
 import com.huerta.core.types.OrderStatus;
 import com.huerta.orders.application.service.orderHistory.OrderHistoryService;
 import com.huerta.orders.application.usecase.orderhistory.createorderhistory.CreateOrderHistoryUseCase;
@@ -14,6 +16,7 @@ import com.huerta.orders.shared.mapper.OrderHistoryMapper;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
+@Service
 public class OrderHistoryServiceImpl implements OrderHistoryService {
     private final CreateOrderHistoryUseCase createOrderHistoryUseCase;
 
