@@ -1,9 +1,10 @@
-package com.huerta.orders.application.usecase.orderhistory;
+package com.huerta.orders.application.service.orderHistory;
 
 import java.util.List;
 import java.util.UUID;
 
 import com.huerta.core.types.OrderStatus;
+import com.huerta.orders.domain.model.OrderHistoryEntity;
 import com.huerta.orders.shared.dto.OrderHistory;
 
 public interface OrderHistoryService {
@@ -13,8 +14,9 @@ public interface OrderHistoryService {
      *
      * @param orderId     the ID of the order
      * @param orderStatus the status of the order
+     * @return the created OrderHistoryEntity
      */
-    void add(UUID orderId, OrderStatus orderStatus);
+    OrderHistoryEntity create(UUID orderId, OrderStatus orderStatus);
 
     /**
      * Retrieves the latest order history entry for a given order ID.
