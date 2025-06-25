@@ -44,3 +44,11 @@ To install without running tests
 ```bash
 mvn clean install -DskipTests
 ```
+
+### OUTPUT TO A TXT FILE
+
+To install without running tests
+
+```bash
+mvn spotless:apply && mvn clean install > output.txt 2>&1
+```
