@@ -57,6 +57,13 @@
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
+						<configuration>
+							<excludes>
+								<exclude>java/*</exclude>
+								<exclude>javax/*</exclude>
+								<exclude>jakarta/*</exclude>
+							</excludes>
+						</configuration>
 					</execution>
 					<!-- Generates report after tests run -->
 					<execution>
