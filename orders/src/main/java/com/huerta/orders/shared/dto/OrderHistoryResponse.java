@@ -1,7 +1,7 @@
 package com.huerta.orders.shared.dto;
 
 import com.huerta.core.types.OrderStatus;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,12 +18,12 @@ public class OrderHistoryResponse {
     private UUID id;
     private UUID orderId;
     private OrderStatus status;
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
 
     public OrderHistoryResponse(UUID id, UUID orderId, OrderStatus status) {
         this.id = id;
         this.orderId = orderId;
         this.status = status;
-        this.createdAt = new Timestamp(System.currentTimeMillis());
+        this.createdAt = LocalDateTime.now();
     }
 }
