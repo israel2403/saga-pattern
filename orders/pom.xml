@@ -113,7 +113,49 @@
 					</execution> -->
 				</executions>
 			</plugin>
-
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.5.3</version> <!-- or latest stable -->
+				<configuration>
+					<includes>
+						<include>**/*Test.java</include>
+					</includes>
+					<useModulePath>false</useModulePath>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.github.spotbugs</groupId>
+				<artifactId>spotbugs-maven-plugin</artifactId>
+				<version>4.9.3.0</version> <!-- Use latest stable -->
+				<executions>
+					<execution>
+						<phase>verify</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<effort>Max</effort>
+					<threshold>Low</threshold>
+					<xmlOutput>true</xmlOutput>
+					<plugins>
+						<plugin>
+							<groupId>com.h3xstream.findsecbugs</groupId>
+							<artifactId>findsecbugs-plugin</artifactId>
+							<version>1.14.0</version> <!-- Check for latest -->
+						</plugin>
+					</plugins>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>com.h3xstream.findsecbugs</groupId>
+						<artifactId>findsecbugs-plugin</artifactId>
+						<version>1.14.0</version>
+					</dependency>
+				</dependencies>
+			</plugin>
 		</plugins>
 	</build>
 

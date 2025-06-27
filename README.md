@@ -45,6 +45,12 @@ To install without running tests
 mvn clean install -DskipTests
 ```
 
+To run a specific test with maven surefire
+
+```bash
+mvn -Dtest=CreateOrderUseCaseImplTest#test_name test
+```
+
 ### OUTPUT TO A TXT FILE
 
 To install without running tests

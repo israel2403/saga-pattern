@@ -1,50 +1,50 @@
 package com.huerta.orders.application.usecase.order.createorder;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.huerta.core.dto.Order;
+import com.huerta.orders.domain.repository.OrderPersistencePort;
+import com.huerta.orders.infrastructure.messaging.KafkaOrderEventPublisher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.huerta.core.dto.Order;
-import com.huerta.orders.domain.repository.OrderPersistencePort;
-import com.huerta.orders.infrastructure.messaging.KafkaOrderEventPublisher;
-
 public class CreateOrderUseCaseImplTest {
 
-  @Mock
-  private OrderPersistencePort orderPersistencePort;
+    @Mock private OrderPersistencePort orderPersistencePort;
 
-  @Mock
-  private KafkaOrderEventPublisher eventPublisher;
+    @Mock private KafkaOrderEventPublisher eventPublisher;
 
-  @InjectMocks
-  private CreateOrderUseCaseImpl createOrderUseCaseImpl;
+    @InjectMocks private CreateOrderUseCaseImpl createOrderUseCaseImpl;
 
-  private Order sampleOrder;
+    private Order validOrder;
 
-  @BeforeEach
-  void setUp() throws Exception {
-    MockitoAnnotations.openMocks(this);
-    String jsonPath = "src/test/resources/json/appliation/usecase/order/createorder/sampleOrder.json";
-    String orderJson = new String(Files.readAllBytes(Paths.get(jsonPath)));
-    ObjectMapper objectMapper = new ObjectMapper();
-    sampleOrder = objectMapper.readValue(orderJson, Order.class);
-  }
+    private ObjectMapper objectMapper;
 
-  @Test
-  void shouldCreateOrderAndPublishEvent() {
-    // Act
-    Order result = createOrderUseCaseImpl.execute(sampleOrder);
+    @BeforeEach
+    void setUp() throws Exception {
+        MockitoAnnotations.openMocks(this);
+        objectMapper = new ObjectMapper();
+        this.validOrder =
+                objectMapper.readValue(
+                        getClass()
+                                .getClassLoader()
+                                .getResourceAsStream(
+                                        "json/application/usecase/order/createorder/valid-order.json"),
+                        Order.class);
+    }
 
-    // Assert
-    assertEquals(sampleOrder, result);
+    @Test
+    void shouldCreateOrderAndPublishEvent() {
+        // Act
+        Order result = createOrderUseCaseImpl.execute(validOrder);
 
-  }
+        // Assert
+        assertEquals(validOrder, result);
+        verify(orderPersistencePort, times(1)).save(validOrder);
+    }
 }
