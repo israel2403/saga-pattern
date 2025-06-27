@@ -1,0 +1,6 @@
+<FindBugsFilter>
+  <Match>
+    <Class name="com.huerta.orders.infrastructure.controller.OrdersController" />
+    <Bug code="SPRING_ENDPOINT" />
+  </Match>
+</FindBugsFilter>
