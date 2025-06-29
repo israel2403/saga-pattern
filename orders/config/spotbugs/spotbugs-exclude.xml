@@ -1,6 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <FindBugsFilter>
+
+  <!-- Exclude Spring Controller warning -->
   <Match>
     <Class name="com.huerta.orders.infrastructure.controller.OrdersController" />
-    <Bug code="SPRING_ENDPOINT" />
+    <Bug pattern="SPRING_ENDPOINT" />
   </Match>
+
+  <!-- Exclude exposure of mutable object: kafkaTemplate -->
+  <Match>
+    <Class name="com.huerta.orders.infrastructure.messaging.KafkaOrderEventPublisher" />
+    <Bug pattern="EI_EXPOSE_REP2" />
+  </Match>
+
 </FindBugsFilter>
