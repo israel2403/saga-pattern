@@ -1,14 +1,17 @@
 package com.huerta.orders.infrastructure.error;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 
-@Data
-@AllArgsConstructor
 @Builder
+@Getter
 public class FieldErrorDTO {
-    private String field;
+    private final String field;
 
-    private String message;
+    private final String message;
+
+    public FieldErrorDTO(String field, String message) {
+        this.field = field;
+        this.message = message;
+    }
 }

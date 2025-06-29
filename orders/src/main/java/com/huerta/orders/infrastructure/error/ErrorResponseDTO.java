@@ -1,24 +1,55 @@
 package com.huerta.orders.infrastructure.error;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import org.springframework.http.HttpStatus;
 
-@Data
-@AllArgsConstructor
 @Builder
 public class ErrorResponseDTO {
 
-    private String apiPath;
+    private final String apiPath;
 
-    private HttpStatus errorCode;
+    private final HttpStatus errorCode;
 
-    private String errorMessage;
+    private final String errorMessage;
 
-    private LocalDateTime errorTime;
+    private final LocalDateTime errorTime;
 
-    private List<FieldErrorDTO> errors;
+    private final List<FieldErrorDTO> errors;
+
+    public ErrorResponseDTO(
+            String apiPath,
+            HttpStatus errorCode,
+            String errorMessage,
+            LocalDateTime errorTime,
+            List<FieldErrorDTO> errors) {
+
+        this.apiPath = apiPath;
+        this.errorCode = errorCode;
+        this.errorMessage = errorMessage;
+        this.errorTime = errorTime != null ? LocalDateTime.from(errorTime) : null;
+        this.errors = errors != null ? List.copyOf(errors) : Collections.emptyList();
+    }
+
+    public String getApiPath() {
+        return apiPath;
+    }
+
+    public HttpStatus getErrorCode() {
+        return errorCode;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public LocalDateTime getErrorTime() {
+        return errorTime != null ? LocalDateTime.from(errorTime) : null;
+    }
+
+    public List<FieldErrorDTO> getErrors() {
+        return List.copyOf(errors);
+    }
 }
