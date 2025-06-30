@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  sonarqube:
+    image: sonarqube:25.6.0.109173-community
+    container_name: sonarqube
+    ports:
+      - "9000:9000"
+    volumes:
+      - /home/huertaubuntupc/volumes/orders-kafka/sonarqube/data:/opt/sonarqube/data
+      - /home/huertaubuntupc/volumes/orders-kafka/sonarqube/extensions:/opt/sonarqube/extensions
+      - /home/huertaubuntupc/volumes/orders-kafka/sonarqube/logs:/opt/sonarqube/logs
+    environment:
+      - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
+    restart: unless-stopped

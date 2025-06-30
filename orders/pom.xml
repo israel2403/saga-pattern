@@ -13,7 +13,9 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>orders</name>
 	<description>Demo project for Spring Boot</description>
-
+	<properties>
+		<sonar.projectKey>orders</sonar.projectKey>
+	</properties>
 
 	<dependencies>
 
@@ -166,6 +168,11 @@
 						<version>1.14.0</version>
 					</dependency>
 				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>5.1.0.4751</version> <!-- latest as of mid-2025 -->
 			</plugin>
 
 

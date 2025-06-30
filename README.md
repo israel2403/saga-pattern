@@ -58,3 +58,11 @@ To install without running tests
 ```bash
 mvn spotless:apply && mvn clean install > output.txt 2>&1
 ```
+
+### DOCKER COMMANDS
+
+To run SonarQube
+
+```bash
+docker compose -f sonarqube-compose.yml up -d
+```
