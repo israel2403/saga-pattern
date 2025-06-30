@@ -127,12 +127,20 @@
 			<plugin>
 				<groupId>com.github.spotbugs</groupId>
 				<artifactId>spotbugs-maven-plugin</artifactId>
-				<version>4.9.3.0</version> <!-- Use latest stable -->
+				<version>4.9.3.0</version>
 				<executions>
 					<execution>
+						<id>spotbugs-check</id>
 						<phase>verify</phase>
 						<goals>
 							<goal>check</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>spotbugs-report</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>spotbugs</goal> <!-- Generates HTML/XML -->
 						</goals>
 					</execution>
 				</executions>
@@ -140,12 +148,14 @@
 					<effort>Max</effort>
 					<threshold>Low</threshold>
 					<xmlOutput>true</xmlOutput>
+					<htmlOutput>true</htmlOutput> <!-- Enable HTML report -->
+					<outputDirectory>${project.build.directory}/spotbugs</outputDirectory>
 					<excludeFilterFile>${project.basedir}/config/spotbugs/spotbugs-exclude.xml</excludeFilterFile>
 					<plugins>
 						<plugin>
 							<groupId>com.h3xstream.findsecbugs</groupId>
 							<artifactId>findsecbugs-plugin</artifactId>
-							<version>1.14.0</version> <!-- Check for latest -->
+							<version>1.14.0</version>
 						</plugin>
 					</plugins>
 				</configuration>
@@ -157,6 +167,7 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+
 
 		</plugins>
 	</build>
