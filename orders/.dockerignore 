@@ -1,0 +1,24 @@
+# Ignore Maven output
+target/
+*.log
+
+# Ignore IDE files
+.idea/
+*.iml
+*.class
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore Git files
+.git
+.gitignore
+
+# Ignore test artifacts
+surefire-reports/
+jacoco.exec
+
+# Ignore temporary files
+*.tmp
+*.swp
