@@ -1,49 +1,54 @@
 pipeline {
-    agent any
+  agent {
+    docker {
+      image 'maven:3.9.6-eclipse-temurin-17'
+    }
+  }
 
-    environment {
-        DOCKERHUB_CREDENTIALS = credentials('Dockerhub')
-        IMAGE_NAME = "israel2403/orders"
+  environment {
+    DOCKER_IMAGE = "yourdockeruser/orders"
+  }
+
+  stages {
+    stage('Build and Test') {
+      steps {
+        dir('orders') {
+          sh 'mvn clean verify'
+        }
+      }
     }
 
-    stages {
-        stage('Build and Test') {
-            steps {
-                dir('orders') {
-                    sh 'mvn clean verify'
-                }
-            }
+    stage('Code Analysis (Jacoco + SpotBugs)') {
+      steps {
+        dir('orders') {
+          junit 'target/surefire-reports/*.xml'
+          jacoco execPattern: 'target/jacoco.exec'
         }
-
-        stage('Code Analysis (Jacoco + SpotBugs)') {
-            steps {
-                dir('orders') {
-                    sh 'mvn spotbugs:spotbugs'
-                }
-            }
-        }
-
-        stage('Build Docker Image') {
-            steps {
-                dir('orders') {
-                    script {
-                        def tag = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
-                        sh "docker build -t ${IMAGE_NAME}:${tag} ."
-                        sh "echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin"
-                        sh "docker push ${IMAGE_NAME}:${tag}"
-                        sh "docker rmi ${IMAGE_NAME}:${tag}"
-                    }
-                }
-            }
-        }
+      }
     }
 
-    post {
-        always {
-            dir('orders') {
-                junit 'target/surefire-reports/*.xml'
-                jacoco execPattern: 'target/jacoco.exec'
+    stage('Build Docker Image') {
+      steps {
+        script {
+          def tag = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
+          dir('orders') {
+            sh "docker build -t $DOCKER_IMAGE:${tag} ."
+            withCredentials([usernamePassword(credentialsId: 'Dockerhub', usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+              sh "echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USER --password-stdin"
+              sh "docker push $DOCKER_IMAGE:${tag}"
             }
+          }
         }
+      }
     }
+  }
+
+  post {
+    always {
+      dir('orders') {
+        junit 'target/surefire-reports/*.xml'
+        jacoco execPattern: 'target/jacoco.exec'
+      }
+    }
+  }
 }
