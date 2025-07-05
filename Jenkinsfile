@@ -1,9 +1,5 @@
 pipeline {
-  agent {
-    docker {
-      image 'maven:3.9.6-eclipse-temurin-17'
-    }
-  }
+  agent any  // Use Jenkins host environment (Docker CLI is available)
 
   environment {
     DOCKER_IMAGE = "yourdockeruser/orders"
@@ -45,9 +41,11 @@ pipeline {
 
   post {
     always {
-      dir('orders') {
-        junit 'target/surefire-reports/*.xml'
-        jacoco execPattern: 'target/jacoco.exec'
+      node {
+        dir('orders') {
+          junit 'target/surefire-reports/*.xml'
+          jacoco execPattern: 'target/jacoco.exec'
+        }
       }
     }
   }
