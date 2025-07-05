@@ -13,9 +13,8 @@ pipeline {
         }
       }
       steps {
-        dir('orders') {
-          sh 'mvn clean verify'
-        }
+        // ✅ Run at root of project, not in orders/
+        sh 'mvn clean verify'
       }
     }
 
@@ -26,6 +25,7 @@ pipeline {
         }
       }
       steps {
+        // ✅ Artifacts are inside orders/
         dir('orders') {
           junit 'target/surefire-reports/*.xml'
           jacoco execPattern: 'target/jacoco.exec'
