@@ -6,14 +6,14 @@ pipeline {
   }
 
   stages {
-    stage('Build and Test') {
+    stage('Build and Test (All Modules)') {
       agent {
         docker {
           image 'maven:3.9.6-eclipse-temurin-17'
         }
       }
       steps {
-        // ✅ Run at root of project, not in orders/
+        // ✅ Run from root — builds ALL modules (core, orders)
         sh 'mvn clean verify'
       }
     }
@@ -25,7 +25,7 @@ pipeline {
         }
       }
       steps {
-        // ✅ Artifacts are inside orders/
+        // ✅ Only analyze orders module
         dir('orders') {
           junit 'target/surefire-reports/*.xml'
           jacoco execPattern: 'target/jacoco.exec'
