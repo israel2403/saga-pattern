@@ -14,7 +14,7 @@ pipeline {
       }
       steps {
         // ✅ Run from root — builds ALL modules (core, orders)
-        sh 'mvn clean verify'
+        sh 'mvn clean install'
       }
     }
 
