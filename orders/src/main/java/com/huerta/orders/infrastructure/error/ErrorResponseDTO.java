@@ -3,7 +3,6 @@ package com.huerta.orders.infrastructure.error;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
-
 import org.springframework.http.HttpStatus;
 
 public final class ErrorResponseDTO {
@@ -19,7 +18,8 @@ public final class ErrorResponseDTO {
         this.errorCode = builder.errorCode;
         this.errorMessage = builder.errorMessage;
         this.errorTime = builder.errorTime != null ? LocalDateTime.from(builder.errorTime) : null;
-        this.errors = builder.errors != null ? List.copyOf(builder.errors) : Collections.emptyList();
+        this.errors =
+                builder.errors != null ? List.copyOf(builder.errors) : Collections.emptyList();
     }
 
     public static Builder builder() {

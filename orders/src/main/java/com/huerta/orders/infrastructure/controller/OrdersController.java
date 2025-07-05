@@ -1,8 +1,16 @@
 package com.huerta.orders.infrastructure.controller;
 
+import com.huerta.core.dto.Order;
+import com.huerta.orders.application.service.order.OrderService;
+import com.huerta.orders.application.service.orderHistory.OrderHistoryService;
+import com.huerta.orders.shared.dto.CreateOrderRequest;
+import com.huerta.orders.shared.dto.CreateOrderResponse;
+import com.huerta.orders.shared.dto.OrderHistoryResponse;
+import com.huerta.orders.shared.mapper.OrderMapper;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.UUID;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,17 +20,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.huerta.core.dto.Order;
-import com.huerta.orders.application.service.order.OrderService;
-import com.huerta.orders.application.service.orderHistory.OrderHistoryService;
-import com.huerta.orders.shared.dto.CreateOrderRequest;
-import com.huerta.orders.shared.dto.CreateOrderResponse;
-import com.huerta.orders.shared.dto.OrderHistoryResponse;
-import com.huerta.orders.shared.mapper.OrderMapper;
-
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/orders")
@@ -36,7 +33,8 @@ public class OrdersController {
     @PostMapping
     public CreateOrderResponse placeOrder(
             @RequestBody @Valid CreateOrderRequest createOrderRequest) {
-        final Order orderCreated = orderService.placeOrder(orderMapper.toDomain(createOrderRequest));
+        final Order orderCreated =
+                orderService.placeOrder(orderMapper.toDomain(createOrderRequest));
         final CreateOrderResponse response = orderMapper.toCreateResponse(orderCreated);
         return ResponseEntity.status(HttpStatus.CREATED).body(response).getBody();
     }
