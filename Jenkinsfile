@@ -1,5 +1,5 @@
 pipeline {
-  agent any  // Use Jenkins host environment (Docker CLI is available)
+  agent any
 
   environment {
     DOCKER_IMAGE = "yourdockeruser/orders"
@@ -41,11 +41,9 @@ pipeline {
 
   post {
     always {
-      node {
-        dir('orders') {
-          junit 'target/surefire-reports/*.xml'
-          jacoco execPattern: 'target/jacoco.exec'
-        }
+      dir('orders') {
+        junit 'target/surefire-reports/*.xml'
+        jacoco execPattern: 'target/jacoco.exec'
       }
     }
   }
