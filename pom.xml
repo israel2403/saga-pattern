@@ -78,7 +78,7 @@
 			</dependency>
 			<!-- Share Core version with All modules-->
 			<dependency>
-				<groupId>com.huerta</groupId>
+				<groupId>com.huerta.kafka</groupId>
 				<artifactId>core</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 			</dependency>
