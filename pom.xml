@@ -51,7 +51,6 @@
 	<modules>
 		<module>core</module>
 		<module>orders</module>
-		<module>products</module>
 	</modules>
 
 	<dependencyManagement>
