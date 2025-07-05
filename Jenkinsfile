@@ -1,12 +1,17 @@
 pipeline {
-  agent any
+  agent none
 
   environment {
-    DOCKER_IMAGE = "yourdockeruser/orders"
+    DOCKER_IMAGE = "israelhf24/orders"
   }
 
   stages {
     stage('Build and Test') {
+      agent {
+        docker {
+          image 'maven:3.9.6-eclipse-temurin-17'
+        }
+      }
       steps {
         dir('orders') {
           sh 'mvn clean verify'
@@ -15,6 +20,11 @@ pipeline {
     }
 
     stage('Code Analysis (Jacoco + SpotBugs)') {
+      agent {
+        docker {
+          image 'maven:3.9.6-eclipse-temurin-17'
+        }
+      }
       steps {
         dir('orders') {
           junit 'target/surefire-reports/*.xml'
@@ -24,6 +34,7 @@ pipeline {
     }
 
     stage('Build Docker Image') {
+      agent any
       steps {
         script {
           def tag = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
